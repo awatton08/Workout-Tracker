@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import Exercise from "./Exercise"
+import { ExerciseContext } from './App';
 
-export default function ExerciseList() {
+
+export default function ExerciseList(props) {
+    const {
+        exercises
+    } = props;
     
+    const {selectedExerciseId, handleExerciseAdd} = useContext(ExerciseContext)
 
     return (
         <div className="exercise-list">
@@ -13,8 +19,9 @@ export default function ExerciseList() {
                     })
                 }
             </div>
+            
             <div className="exercise-list__add-exercise-btn-container">
-                <button  className="btn">Add exercise</button>
+                {!selectedExerciseId && <button  className="btn" onClick={handleExerciseAdd}>Add Exercise</button>}
             </div>
         </div>
     )
