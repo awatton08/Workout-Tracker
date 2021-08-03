@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import Exercise from "./Exercise"
 import { ExerciseContext } from './App';
+import EditExercise from './EditExercise';
 
 
 export default function ExerciseList(props) {
@@ -15,7 +16,14 @@ export default function ExerciseList(props) {
             <div>
                 {
                     exercises.map(exercise => {
-                        return <Exercise key={ exercise.id } { ...exercise } />
+                   
+                        return (
+                            <div>
+                                {exercise.id !== selectedExerciseId
+                                    ? <Exercise key={ exercise.id } { ...exercise } />
+                                    : <EditExercise key={ exercise.id } { ...exercise } />}
+                            </div>
+                        )
                     })
                 }
             </div>

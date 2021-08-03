@@ -18,28 +18,35 @@ function App() {
       description: "",
       sessions: [{id: uuidv4(), reps: 0, sets:0}]
     }
-    console.log(newExercise)
+
     setExercises([...exercises, newExercise])
     setSelectedExerciseId(newExercise.id)
   }
 
   
   const handleExerciseSelect = (id) => {
-    console.log(id)
     setSelectedExerciseId(id);
+  }
+
+  const handleExerciseChange = (id, exercise) => {
+    const newExercises = [...exercises]
+    const index = newExercises.findIndex(r => r.id === id);
+    newExercises[index] = exercise;
+    setExercises(newExercises);
   }
 
   const exerciseContextValue = {
     handleExerciseAdd,
     handleExerciseSelect,
-    selectedExerciseId
+    selectedExerciseId,
+    handleExerciseChange
   }
 
   return (
     <>
       <ExerciseContext.Provider value={ exerciseContextValue }>
         <h1>Hello React</h1>
-        {selectedExerciseId }
+        { selectedExerciseId }
         <ExerciseList selectedExerciseId={selectedExerciseId} exercises={ exercises }/>
       </ExerciseContext.Provider>
     </>
@@ -52,9 +59,9 @@ const sample = [
     name: "Bench Press",
     description: "Press benches, just do it",
     sessions: [
-      {reps: 12, sets: 4},
-      {reps: 12, sets: 3},
-      {reps: 10, sets: 3},
+      {id: uuidv4(), reps: 12, sets: 4},
+      {id: uuidv4(), reps: 12, sets: 3},
+      {id: uuidv4(), reps: 10, sets: 3}
     ]
 
   },
@@ -63,9 +70,8 @@ const sample = [
     name: "Lunges",
     description: "Good for legs",
     sessions: [
-      {reps: 20, sets: 3},
-      {reps: 20, sets: 2},
-      {reps: 20, sets: 2},
+      {id: uuidv4(), reps: 20, sets: 3},
+      {id: uuidv4(), reps: 20, sets: 2},
     ]
   },
   {
@@ -73,9 +79,9 @@ const sample = [
     name: "Skullcrushers",
     description: "Tricep workout",
     sessions: [
-      {reps: 20, sets: 3},
-      {reps: 15, sets: 3},
-      {reps: 10, sets: 3},
+      {id: uuidv4(), reps: 20, sets: 3},
+      {id: uuidv4(), reps: 15, sets: 3},
+      {id: uuidv4(), reps: 10, sets: 3}
     ]
   }];
 
